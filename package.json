@@ -1,0 +1,29 @@
+{
+  "author": "Deadcow.enterprises",
+  "name": "@deadcow-enterprises/react-form-hook",
+  "version": "0.0.1",
+  "private": false,
+  "description": "A model-driven react form hook",
+  "main": "index.js",
+  "repository": "https://github.com/DeadCowDev/react-form-hook",
+  "homepage": "https://github.com/DeadCowDev/react-form-hook",
+  "scripts": {
+    "dev": "vitest",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "React",
+    "form",
+    "zod",
+    "typescript"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "zod": "^3.22.4"
+  }
+}
