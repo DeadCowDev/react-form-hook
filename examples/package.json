@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@deadcow-enterprises/react-form-hook": "file:..",
+    "@deadcow-enterprises/react-form-hook": "^0.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.22.4"

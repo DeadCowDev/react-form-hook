@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@deadcow-enterprises/react-form-hook':
-    specifier: file:..
-    version: file:..(react@18.2.0)(zod@3.22.4)
+    specifier: ^0.0.3
+    version: 0.0.3(react@18.2.0)(zod@3.22.4)
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -280,6 +280,16 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
     dev: true
+
+  /@deadcow-enterprises/react-form-hook@0.0.3(react@18.2.0)(zod@3.22.4):
+    resolution: {integrity: sha512-1HaZmvhmJcNT56+XMc4Nt6Ed7qAxcgPtD9B/DZLJszY9hYuEOWOmaY8FB+M+KICsNWqfAb8z/7KcwT2X+f4BUg==}
+    peerDependencies:
+      react: ^18.2.0
+      zod: ^3.22.4
+    dependencies:
+      react: 18.2.0
+      zod: 3.22.4
+    dev: false
 
   /@esbuild/android-arm64@0.18.20:
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}
@@ -1777,16 +1787,4 @@ packages:
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
-    dev: false
-
-  file:..(react@18.2.0)(zod@3.22.4):
-    resolution: {directory: .., type: directory}
-    id: file:..
-    name: '@deadcow-enterprises/react-form-hook'
-    peerDependencies:
-      react: ^18.2.0
-      zod: ^3.22.4
-    dependencies:
-      react: 18.2.0
-      zod: 3.22.4
     dev: false
