@@ -3,6 +3,7 @@
 .gitignore
 .github
 src
+examples
 pnpm-lock.yaml
 tsconfig.json
 vitest.config.ts
