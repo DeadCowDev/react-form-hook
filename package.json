@@ -1,7 +1,7 @@
 {
   "author": "Deadcow.enterprises",
   "name": "@deadcow-enterprises/react-form-hook",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "A model-driven react form hook",
   "repository": "https://github.com/DeadCowDev/react-form-hook",
