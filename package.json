@@ -1,12 +1,14 @@
 {
   "author": "Deadcow.enterprises",
   "name": "@deadcow-enterprises/react-form-hook",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "private": false,
   "description": "A model-driven react form hook",
-  "main": "index.js",
   "repository": "https://github.com/DeadCowDev/react-form-hook",
   "homepage": "https://github.com/DeadCowDev/react-form-hook",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vitest",
     "test": "vitest run",
