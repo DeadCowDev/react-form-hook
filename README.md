@@ -6,7 +6,23 @@
 
 A model-driven, simple and typesafe approach to forms in React
 
-## Usage/Examples
+## Features
+
+- Simple to use
+- Typesafe from start to end
+- Lightweight
+- Support for Zod
+
+
+## Installation and usage
+
+First install react-form-hook:
+
+```bash
+npm i @deadcow-enterprises/react-form-hook
+```
+
+then use it in your application
 
 ```javascript
 import { useForm } from "@deadcow-enterprises/react-form-hook";
@@ -76,31 +92,9 @@ function App() {
 ```
 
 
-## Run Locally
+## Props
 
-Clone the project
-
-```bash
-  git clone https://github.com/DeadCowDev/react-form-hook.git
-```
-
-Go to the project directory
-
-```bash
-  cd react-form-hook
-```
-
-Install dependencies
-
-```bash
-  pnpm install
-```
-
-Start vitest in watch mode
-
-```bash
-  pnpm run dev
-```
+Any additional information goes here
 
 
 ## License
