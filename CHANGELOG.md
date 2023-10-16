@@ -1,5 +1,11 @@
 # @deadcow-enterprises/react-form-hook
 
+## 0.0.4
+
+### Patch Changes
+
+- 6c21fe1: Add Readme
+
 ## 0.0.2
 
 ### Patch Changes
