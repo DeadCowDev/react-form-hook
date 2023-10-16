@@ -1,0 +1,23 @@
+form {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 5px;
+  border: 1px solid #333;
+
+  width: 30rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}

@@ -1,29 +1,6 @@
-
-# React Form Hook
-
-A model-driven, simple and typesafe approach to forms in React
-
-## Features
-
-- Simple to use
-- Typesafe from start to end
-- Lightweight
-- Support for Zod
-
-
-## Installation and usage
-
-First install react-form-hook:
-
-```bash
-npm i @deadcow-enterprises/react-form-hook
-```
-
-then use it in your application
-
-```javascript
 import { useForm } from "@deadcow-enterprises/react-form-hook";
 import { z } from "zod";
+import "./App.css";
 
 type LoginModel = {
   username: string;
@@ -86,10 +63,5 @@ function App() {
     </form>
   );
 }
-```
 
-You can also check the example project repo [here](https://github.com/DeadCowDev/react-form-hook/tree/main/example)
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
+export default App;
