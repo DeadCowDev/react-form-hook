@@ -1,3 +1,4 @@
+
 # React Form Hook
 
 A model-driven, simple and typesafe approach to forms in React
@@ -87,12 +88,7 @@ function App() {
 }
 ```
 
-
-## Props
-
-Any additional information goes here
-
-
+You can also check the example project repo [here](https://github.com/DeadCowDev/react-form-hook/tree/main/example)
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
