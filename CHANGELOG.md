@@ -1,5 +1,11 @@
 # @deadcow-enterprises/react-form-hook
 
+## 0.0.5
+
+### Patch Changes
+
+- e47b398: Add form loading property. Add function to force error validation
+
 ## 0.0.4
 
 ### Patch Changes
