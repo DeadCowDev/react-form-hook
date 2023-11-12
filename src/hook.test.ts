@@ -224,6 +224,38 @@ describe("Hook", () => {
     expect(ev.preventDefault).toBeCalled();
     expect(fn).toBeCalledWith(formInitialValue);
   });
+  it("Should run promise callback function on submit", () => {
+    const formInitialValue: FormType = {
+      propertyA: "myValue",
+      propertyB: 1,
+      propertyC: true,
+    };
+    const { result } = renderHook(() =>
+      useForm<FormType>({
+        propertyA: {
+          value: formInitialValue.propertyA,
+        },
+        propertyB: {
+          value: formInitialValue.propertyB,
+        },
+        propertyC: {
+          value: formInitialValue.propertyC,
+        },
+      })
+    );
+
+    const fn = vi.fn<any, Promise<void>>();
+
+    const ev: Pick<FormEvent, "preventDefault"> = {
+      preventDefault: vi.fn(),
+    };
+
+    act(() => {
+      result.current.handleSubmit(fn)(ev as any);
+    });
+    expect(ev.preventDefault).toBeCalled();
+    expect(fn).toBeCalledWith(formInitialValue);
+  });
   it("Should not run callback function on submit if there are errors", () => {
     const formInitialValue: FormType = {
       propertyA: "myValue",
