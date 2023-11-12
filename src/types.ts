@@ -17,6 +17,7 @@ export interface FormResult<T> {
   loading: boolean;
   errors: { [P in keyof T]?: FormError };
   markAsDirty: () => void;
+  updateValidity: () => boolean;
   addError: (k: keyof T, error: string) => void;
   setValue: <K extends keyof T>(k: K, value: T[K]) => FormError;
   reset: (newValue?: T) => void;

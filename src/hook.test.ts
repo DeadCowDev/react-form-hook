@@ -303,4 +303,43 @@ describe("Hook", () => {
       propertyB: ["Should be at least X"],
     });
   });
+  it("Should update validity", () => {
+    const formInitialValue: FormType = {
+      propertyA: "myValue",
+      propertyB: 1,
+      propertyC: true,
+    };
+    const { result } = renderHook(() =>
+      useForm<FormType>({
+        propertyA: {
+          value: formInitialValue.propertyA,
+          validator: () =>
+            z
+              .string()
+              .min(
+                formInitialValue.propertyA.length + 1,
+                "Should be X characters long"
+              ),
+        },
+        propertyB: {
+          value: formInitialValue.propertyB,
+          validator: z
+            .number()
+            .min(formInitialValue.propertyB + 1, "Should be at least X"),
+        },
+        propertyC: {
+          value: formInitialValue.propertyC,
+          validator: z.boolean(),
+        },
+      })
+    );
+
+    act(() => {
+      result.current.updateValidity();
+    });
+    expect(result.current.errors).toStrictEqual({
+      propertyA: ["Should be X characters long"],
+      propertyB: ["Should be at least X"],
+    });
+  });
 });

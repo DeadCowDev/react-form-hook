@@ -122,6 +122,7 @@ export function useForm<T extends Record<string, any>>(
           };
         });
       },
+      updateValidity: () => updateValidity(),
     };
   }, [config, formResult, initialValue]);
 
