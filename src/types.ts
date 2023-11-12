@@ -14,11 +14,12 @@ export type FormOptions<T extends Record<string, any>> = {
 export interface FormResult<T> {
   value: T;
   dirty: boolean;
+  loading: boolean;
   errors: { [P in keyof T]?: FormError };
-
   markAsDirty: () => void;
+  updateValidity: () => boolean;
   addError: (k: keyof T, error: string) => void;
   setValue: <K extends keyof T>(k: K, value: T[K]) => FormError;
   reset: (newValue?: T) => void;
-  handleSubmit: (cb: (v: T) => void) => (ev: FormEvent) => void;
+  handleSubmit: (cb: (v: T) => void | Promise<void>) => (ev: FormEvent) => void;
 }

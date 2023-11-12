@@ -10,12 +10,39 @@ export function useForm<T extends Record<string, any>>(
   );
 
   const [formResult, setFormResult] = useState<
-    Pick<FormResult<T>, "dirty" | "errors" | "value">
+    Pick<FormResult<T>, "dirty" | "errors" | "value" | "loading">
   >(() => ({
     dirty: false,
     errors: {},
     value: initialValue,
+    loading: false,
   }));
+
+  const updateValidity = () => {
+    const errors: typeof formResult.errors = {};
+
+    Object.keys(config).forEach((k: keyof T) => {
+      const validator = config[k].validator;
+      const value = formResult.value[k];
+      if (validator) {
+        const result =
+          typeof validator === "function"
+            ? validator(formResult.value)
+            : validator;
+        const error = result.safeParse(value);
+        if (error.success) {
+          return;
+        }
+
+        errors[k] = error.error.errors.map((e) => e.message);
+      }
+    });
+
+    const newValue: typeof formResult = { ...formResult, errors };
+
+    setFormResult(() => newValue);
+    return Object.keys(errors).length === 0;
+  };
 
   const res = useMemo<FormResult<T>>(() => {
     return {
@@ -27,42 +54,28 @@ export function useForm<T extends Record<string, any>>(
         }
         setFormResult({
           dirty: false,
+          loading: false,
           errors: {},
           value: valueToResetTo,
         });
       },
       handleSubmit: (cb) => {
-        return (ev) => {
+        return async (ev) => {
           ev.preventDefault();
+          const valid = updateValidity();
+          if (!valid) {
+            return;
+          }
 
-          setFormResult((prev) => {
-            const errors: typeof prev.errors = {};
-
-            Object.keys(config).forEach((k: keyof T) => {
-              const validator = config[k].validator;
-              const value = prev.value[k];
-              if (validator) {
-                const result =
-                  typeof validator === "function"
-                    ? validator(prev.value)
-                    : validator;
-                const error = result.safeParse(value);
-                if (error.success) {
-                  return;
-                }
-
-                errors[k] = error.error.errors.map((e) => e.message);
-              }
-            });
-
-            const newValue: typeof prev = { ...prev, errors };
-
-            if (Object.keys(errors).length === 0) {
-              cb(prev.value);
+          try {
+            setFormResult((prev) => ({ ...prev, loading: true }));
+            const cbResult = cb(formResult.value);
+            if (cbResult instanceof Promise) {
+              await cbResult;
             }
-
-            return newValue;
-          });
+          } finally {
+            setFormResult((prev) => ({ ...prev, loading: false }));
+          }
         };
       },
       setValue: (k, v) => {
@@ -109,6 +122,7 @@ export function useForm<T extends Record<string, any>>(
           };
         });
       },
+      updateValidity: () => updateValidity(),
     };
   }, [config, formResult, initialValue]);
 

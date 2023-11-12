@@ -224,6 +224,38 @@ describe("Hook", () => {
     expect(ev.preventDefault).toBeCalled();
     expect(fn).toBeCalledWith(formInitialValue);
   });
+  it("Should run promise callback function on submit", () => {
+    const formInitialValue: FormType = {
+      propertyA: "myValue",
+      propertyB: 1,
+      propertyC: true,
+    };
+    const { result } = renderHook(() =>
+      useForm<FormType>({
+        propertyA: {
+          value: formInitialValue.propertyA,
+        },
+        propertyB: {
+          value: formInitialValue.propertyB,
+        },
+        propertyC: {
+          value: formInitialValue.propertyC,
+        },
+      })
+    );
+
+    const fn = vi.fn<any, Promise<void>>();
+
+    const ev: Pick<FormEvent, "preventDefault"> = {
+      preventDefault: vi.fn(),
+    };
+
+    act(() => {
+      result.current.handleSubmit(fn)(ev as any);
+    });
+    expect(ev.preventDefault).toBeCalled();
+    expect(fn).toBeCalledWith(formInitialValue);
+  });
   it("Should not run callback function on submit if there are errors", () => {
     const formInitialValue: FormType = {
       propertyA: "myValue",
@@ -266,6 +298,45 @@ describe("Hook", () => {
     });
     expect(ev.preventDefault).toBeCalled();
     expect(fn).not.toHaveBeenCalled();
+    expect(result.current.errors).toStrictEqual({
+      propertyA: ["Should be X characters long"],
+      propertyB: ["Should be at least X"],
+    });
+  });
+  it("Should update validity", () => {
+    const formInitialValue: FormType = {
+      propertyA: "myValue",
+      propertyB: 1,
+      propertyC: true,
+    };
+    const { result } = renderHook(() =>
+      useForm<FormType>({
+        propertyA: {
+          value: formInitialValue.propertyA,
+          validator: () =>
+            z
+              .string()
+              .min(
+                formInitialValue.propertyA.length + 1,
+                "Should be X characters long"
+              ),
+        },
+        propertyB: {
+          value: formInitialValue.propertyB,
+          validator: z
+            .number()
+            .min(formInitialValue.propertyB + 1, "Should be at least X"),
+        },
+        propertyC: {
+          value: formInitialValue.propertyC,
+          validator: z.boolean(),
+        },
+      })
+    );
+
+    act(() => {
+      result.current.updateValidity();
+    });
     expect(result.current.errors).toStrictEqual({
       propertyA: ["Should be X characters long"],
       propertyB: ["Should be at least X"],
