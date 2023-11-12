@@ -1,4 +1,3 @@
-
 # React Form Hook
 
 A model-driven, simple and typesafe approach to forms in React
@@ -9,7 +8,6 @@ A model-driven, simple and typesafe approach to forms in React
 - Typesafe from start to end
 - Lightweight
 - Support for Zod
-
 
 ## Installation and usage
 
@@ -26,21 +24,24 @@ import { useForm } from "@deadcow-enterprises/react-form-hook";
 import { z } from "zod";
 
 type LoginModel = {
-  username: string;
-  password: string;
+  username: string,
+  password: string,
 };
 
 function App() {
-  const form = useForm<LoginModel>({
-    username: {
-      value: "",
-      validator: z.string().min(1, "Username is required"),
-    },
-    password: {
-      value: "",
-      validator: z.string().min(1, "Password is required"),
-    },
-  });
+  const form =
+    useForm <
+    LoginModel >
+    {
+      username: {
+        value: "",
+        validator: z.string().min(1, "Username is required"),
+      },
+      password: {
+        value: "",
+        validator: z.string().min(1, "Password is required"),
+      },
+    };
   const login = (formValue: LoginModel) => {
     // do something with formValue here like send it to the server
     console.log(formValue);
@@ -75,7 +76,7 @@ function App() {
             form.setValue("password", ev.target.value);
           }}
         />
-        {form.errors.username?.map((err, i) => (
+        {form.errors.password?.map((err, i) => (
           <span className="error" key={i}>
             {err}
           </span>
@@ -89,7 +90,7 @@ function App() {
 ```
 
 You can also check the example project repo [here](https://github.com/DeadCowDev/react-form-hook/tree/main/example)
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-

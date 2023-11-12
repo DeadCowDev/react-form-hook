@@ -52,7 +52,7 @@ function App() {
             form.setValue("password", ev.target.value);
           }}
         />
-        {form.errors.username?.map((err, i) => (
+        {form.errors.password?.map((err, i) => (
           <span className="error" key={i}>
             {err}
           </span>
