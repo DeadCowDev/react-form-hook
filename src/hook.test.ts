@@ -1,7 +1,7 @@
-import { renderHook, act } from "@testing-library/react";
-import { z } from "zod";
+import { act, renderHook } from "@testing-library/react";
 import { FormEvent } from "react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import { z } from "zod";
 import { useForm } from "./hook";
 import { FormError } from "./types";
 interface FormType {
@@ -214,14 +214,16 @@ describe("Hook", () => {
 
     const fn = vi.fn();
 
-    const ev: Pick<FormEvent, "preventDefault"> = {
+    const ev: Pick<FormEvent, "preventDefault" | "stopPropagation"> = {
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     };
 
     act(() => {
       result.current.handleSubmit(fn)(ev as any);
     });
     expect(ev.preventDefault).toBeCalled();
+    expect(ev.stopPropagation).toBeCalled();
     expect(fn).toBeCalledWith(formInitialValue);
   });
   it("Should run promise callback function on submit", () => {
@@ -246,14 +248,16 @@ describe("Hook", () => {
 
     const fn = vi.fn<any, Promise<void>>();
 
-    const ev: Pick<FormEvent, "preventDefault"> = {
+    const ev: Pick<FormEvent, "preventDefault" | "stopPropagation"> = {
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     };
 
     act(() => {
       result.current.handleSubmit(fn)(ev as any);
     });
     expect(ev.preventDefault).toBeCalled();
+    expect(ev.stopPropagation).toBeCalled();
     expect(fn).toBeCalledWith(formInitialValue);
   });
   it("Should not run callback function on submit if there are errors", () => {
@@ -289,14 +293,16 @@ describe("Hook", () => {
 
     const fn = vi.fn();
 
-    const ev: Pick<FormEvent, "preventDefault"> = {
+    const ev: Pick<FormEvent, "preventDefault" | "stopPropagation"> = {
       preventDefault: vi.fn(),
+      stopPropagation: vi.fn(),
     };
 
     act(() => {
       result.current.handleSubmit(fn)(ev as any);
     });
     expect(ev.preventDefault).toBeCalled();
+    expect(ev.stopPropagation).toBeCalled();
     expect(fn).not.toHaveBeenCalled();
     expect(result.current.errors).toStrictEqual({
       propertyA: ["Should be X characters long"],

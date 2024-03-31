@@ -61,6 +61,7 @@ export function useForm<T extends Record<string, any>>(
       },
       handleSubmit: (cb) => {
         return async (ev) => {
+          ev.stopPropagation();
           ev.preventDefault();
           const valid = updateValidity();
           if (!valid) {
