@@ -1,5 +1,11 @@
 # @deadcow-enterprises/react-form-hook
 
+## 0.0.6
+
+### Patch Changes
+
+- 3db10af: stop propagation of form submit event
+
 ## 0.0.5
 
 ### Patch Changes
